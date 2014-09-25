@@ -38,9 +38,10 @@ We want to demonstrate how much debugging or development functionality is added 
     #include <iostream>
     
     // library includes
-    #include <opencv2/highgui/highgui.hpp>
-    #include <opencv2/imgproc/imgproc.hpp>
-    #include <opencv2/features2d/features2d.hpp>
+    #include <opencv2/highgui.hpp>
+    #include <opencv2/videoio.hpp>
+    #include <opencv2/imgproc.hpp>
+    #include <opencv2/features2d.hpp>
     
     // Visual debugging
     #include <opencv2/cvv/cvv.hpp>
@@ -111,8 +112,8 @@ We want to demonstrate how much debugging or development functionality is added 
     
       if (resolution) {
         printf("Setting resolution to %dx%d\n", resolution->width, resolution->height);
-        capture.set(CV_CAP_PROP_FRAME_WIDTH, resolution->width);
-        capture.set(CV_CAP_PROP_FRAME_HEIGHT, resolution->height);
+        capture.set(cv::CAP_PROP_FRAME_WIDTH, resolution->width);
+        capture.set(cv::CAP_PROP_FRAME_HEIGHT, resolution->height);
       }
     
     
@@ -137,7 +138,7 @@ We want to demonstrate how much debugging or development functionality is added 
     
         // convert to grayscale
         cv::Mat imgGray;
-        cv::cvtColor(imgRead, imgGray, CV_BGR2GRAY);
+        cv::cvtColor(imgRead, imgGray, cv::COLOR_BGR2GRAY);
         cvv::debugFilter(imgRead, imgGray, CVVISUAL_LOCATION, "to gray");
     
         // filter edges using Canny on smoothed image
