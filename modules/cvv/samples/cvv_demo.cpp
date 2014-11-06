@@ -80,7 +80,7 @@ main(int argc, char** argv)
   cv::Mat prevDescriptors;
 
   int maxFeatureCount = 500;
-  cv::ORB detector(maxFeatureCount);
+  cv::Ptr<cv::ORB> detector = cv::ORB::create(maxFeatureCount);
 
   cv::BFMatcher matcher(cv::NORM_HAMMING);
 
@@ -102,7 +102,7 @@ main(int argc, char** argv)
     // detect ORB features
     std::vector<cv::KeyPoint> keypoints;
     cv::Mat descriptors;
-    detector(imgGray, cv::noArray(), keypoints, descriptors);
+    detector->detectAndCompute(imgGray, cv::noArray(), keypoints, descriptors);
     printf("%d: detected %zd keypoints\n", imgId, keypoints.size());
 
     // match them to previous image (if available)

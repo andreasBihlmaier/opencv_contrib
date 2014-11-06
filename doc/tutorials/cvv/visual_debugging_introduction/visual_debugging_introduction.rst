@@ -122,7 +122,7 @@ We want to demonstrate how much debugging or development functionality is added 
       cv::Mat prevDescriptors;
     
       int maxFeatureCount = 500;
-      cv::ORB detector(maxFeatureCount);
+      cv::Ptr<cv::ORB> detector = cv::ORB::create(maxFeatureCount);
     
       cv::BFMatcher matcher(cv::NORM_HAMMING);
     
@@ -157,7 +157,7 @@ We want to demonstrate how much debugging or development functionality is added 
         // detect ORB features
         std::vector<cv::KeyPoint> keypoints;
         cv::Mat descriptors;
-        detector(imgGray, cv::noArray(), keypoints, descriptors);
+        detector->detectAndCompute(imgGray, cv::noArray(), keypoints, descriptors);
         printf("%d: detected %zd keypoints\n", imgId, keypoints.size());
     
         // match them to previous image (if available)
