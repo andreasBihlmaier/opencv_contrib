@@ -80,7 +80,7 @@ namespace cv{
 namespace bioinspired{
 
 /**
- * @class RetinaFastToneMappingImpl a wrapper class which allows the tone mapping algorithm of Meylan&al(2007) to be used with OpenCV.
+ * a wrapper class which allows the tone mapping algorithm of Meylan&al(2007) to be used with OpenCV.
  * This algorithm is already implemented in thre Retina class (retina::applyFastToneMapping) but used it does not require all the retina model to be allocated. This allows a light memory use for low memory devices (smartphones, etc.
  * As a summary, these are the model properties:
  * => 2 stages of local luminance adaptation with a different local neighborhood for each.
@@ -93,7 +93,7 @@ namespace bioinspired{
  * regarding spatio-temporal filter and the bigger retina model :
  * Vision: Images, Signals and Neural Networks: Models of Neural Processing in Visual Perception (Progress in Neural Processing),By: Jeanny Herault, ISBN: 9814273686. WAPI (Tower ID): 113266891.
  */
-class CV_EXPORTS RetinaFastToneMapping : public Algorithm
+class CV_EXPORTS_W RetinaFastToneMapping : public Algorithm
 {
 public:
 
@@ -103,7 +103,7 @@ public:
      @param inputImage the input image to process RGB or gray levels
      @param outputToneMappedImage the output tone mapped image
      */
-    virtual void applyFastToneMapping(InputArray inputImage, OutputArray outputToneMappedImage)=0;
+    CV_WRAP virtual void applyFastToneMapping(InputArray inputImage, OutputArray outputToneMappedImage)=0;
 
     /**
      * setup method that updates tone mapping behaviors by adjusing the local luminance computation area
@@ -111,10 +111,10 @@ public:
      * @param ganglioncellsNeighborhoodRadius the second stage local adaptation area
      * @param meanLuminanceModulatorK the factor applied to modulate the meanLuminance information (default is 1, see reference paper)
      */
-    virtual void setup(const float photoreceptorsNeighborhoodRadius=3.f, const float ganglioncellsNeighborhoodRadius=1.f, const float meanLuminanceModulatorK=1.f)=0;
+    CV_WRAP virtual void setup(const float photoreceptorsNeighborhoodRadius=3.f, const float ganglioncellsNeighborhoodRadius=1.f, const float meanLuminanceModulatorK=1.f)=0;
 };
 
-CV_EXPORTS Ptr<RetinaFastToneMapping> createRetinaFastToneMapping(Size inputSize);
+CV_EXPORTS_W Ptr<RetinaFastToneMapping> createRetinaFastToneMapping(Size inputSize);
 
 }
 }
